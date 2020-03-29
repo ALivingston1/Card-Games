@@ -2,16 +2,17 @@ package components;
 
 import util.Reference;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Deck implements IDeck {
-    public Stack<Card> cardStack;
+    public ArrayList<Card> deck;
 
     public Deck() {
-        cardStack = new Stack<>();
+        deck = new ArrayList<>();
         for (int i = 0; i < Reference.suits.length; i++) {
             for (int j = 0; j < Reference.values.length; j++) {
-                cardStack.add(new Card(Reference.suits[i], Reference.values[i]));
+                deck.add(new Card(Reference.suits[i], Reference.values[j]));
             }
         }
     }
@@ -53,21 +54,29 @@ public class Deck implements IDeck {
 
     @Override
     public int getCard(Card card) {
-        return cardStack.indexOf(card);
+        return deck.indexOf(card);
     }
 
     @Override
     public Card getCard(int index) {
-        return cardStack.get(index);
+        return deck.get(index);
     }
 
     @Override
     public Card getTopCard() {
-        return cardStack.firstElement();
+        return deck.get(0);
     }
 
     @Override
     public Card getBottomCard() {
-        return cardStack.lastElement();
+        return deck.get(deck.size() - 1);
     }
+
+    public void print() {
+        for (int i = 0; i < deck.size(); i++) {
+            System.out.println("Card " + (i + 1) + ": " + "suit: " + deck.get(i).getSuit() + " value: " + deck.get(i).getValue());
+        }
+    }
+
+    private swap(C)
 }
