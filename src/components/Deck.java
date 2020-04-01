@@ -6,20 +6,22 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Deck implements IDeck {
-    public ArrayList<Card> deck;
+    private ArrayList<Card> deck;
+    private boolean allowJokers;
 
     public Deck() {
         deck = new ArrayList<>();
-        for (int i = 0; i < Reference.suits.length; i++) {
-            for (int j = 0; j < Reference.values.length; j++) {
-                deck.add(new Card(Reference.suits[i], Reference.values[j]));
-            }
-        }
+        addNewCards();
     }
 
+    /**
+     * Clears deck, adds new cards to the deck.
+     * Faster than actually sorting.
+     */
     @Override
     public void sort() {
-
+        deck.clear();
+        addNewCards();
     }
 
     @Override
@@ -78,5 +80,34 @@ public class Deck implements IDeck {
         }
     }
 
-    private swap(C)
+    /**
+     * Swaps Cards.
+     * Creates temp card to store values being overwritten.
+     * Sets new values.
+     * @param x
+     * @param y
+     */
+    public void swap(Card x, Card y) {
+        Card temp = new Card(x.getSuit(), x.getValue());
+        x.set(y.getSuit(), y.getValue());
+        y.set(temp.getSuit(), temp.getValue());
+    }
+
+    /**
+     * Adds all 52 cards to deck.
+     * Adds Jokers if allowed.
+     */
+    private void addNewCards() {
+        for (int i = 0; i < Reference.suits.length; i++) {
+            for (int j = 0; j < Reference.values.length; j++) {
+                deck.add(new Card(Reference.suits[i], Reference.values[j]));
+            }
+        }
+
+        if (allowJokers) {
+            for (int i = 0; i < Reference.joker.length(); i++) {
+                deck.add(new Card("", ""));
+            }
+        }
+    }
 }

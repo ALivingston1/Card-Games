@@ -18,6 +18,11 @@ public class Card {
         this.value = value;
     }
 
+    public void set(String suit, String value) {
+        this.suit = suit;
+        this.value = value;
+    }
+
     /**
      * Sets suit of card
      * @param suit
